@@ -1,0 +1,3039 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://webservices.ecircleag.com/rpcns" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webservices.ecircleag.com/rpcns" xmlns:intf="http://webservices.ecircleag.com/rpcns" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:documentation>eCircle AG WebService Access to eC-Messenger direct Marketing Suite v1.33-SNAPSHOT (323)</wsdl:documentation> <!-- eC-Messenger RPC WSDL 1.33-SNAPSHOT (323) (C) eCircle AG 2004..2009 -->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservices.ecircleag.com/rpcns" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getVersion">
+    <complexType/>
+   </element>
+   <element name="getVersionResponse">
+    <complexType>
+     <sequence>
+      <element name="getVersionReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getGroupId">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getGroupIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getGroupIdReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="EcMException">
+    <sequence>
+     <element name="code" type="xsd:int"/>
+     <element name="errorMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="fault" type="impl:EcMException"/>
+   <element name="logon">
+    <complexType>
+     <sequence>
+      <element name="realm" type="xsd:string"/>
+      <element name="user" type="xsd:string"/>
+      <element name="passwd" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="logonResponse">
+    <complexType>
+     <sequence>
+      <element name="logonReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="logout">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="logoutResponse">
+    <complexType/>
+   </element>
+   <element name="setAsynchronous">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="asynchronous" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setAsynchronousResponse">
+    <complexType/>
+   </element>
+   <element name="createUser">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userXmlSpec" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createUserResponse">
+    <complexType>
+     <sequence>
+      <element name="createUserReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateUserByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userXml" type="xsd:string"/>
+      <element name="sendMessage" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateUserByEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="createOrUpdateUserByEmailReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateUserMemberByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="memberXml" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="sendMessage" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateUserMemberByEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="createOrUpdateUserMemberByEmailReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteUserByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteUserByEmailResponse">
+    <complexType/>
+   </element>
+   <element name="lookupUserByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupUserByEmailReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByIdentifier">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="identifier" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByIdentifierResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupUserByIdentifierReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByMobileNumber">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="mobile" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByMobileNumberResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupUserByMobileNumberReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByMobileNumber">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="mobile" type="xsd:string"/>
+      <element name="onlyActive" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByMobileNumberResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByMobileNumberReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByFaxNumber">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="fax" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByFaxNumberResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupUserByFaxNumberReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMessages">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="lookupParams" type="impl:MessageLookupParams"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MessageLookupParams">
+    <sequence>
+     <element name="batchOffset" nillable="true" type="xsd:int"/>
+     <element name="batchSize" nillable="true" type="xsd:int"/>
+     <element name="groupId" nillable="true" type="xsd:string"/>
+     <element name="groupName" nillable="true" type="xsd:string"/>
+     <element name="messageCreationDateFrom" nillable="true" type="xsd:dateTime"/>
+     <element name="messageCreationDateTo" nillable="true" type="xsd:dateTime"/>
+     <element name="messageId" nillable="true" type="xsd:string"/>
+     <element name="messageName" nillable="true" type="xsd:string"/>
+     <element name="messageSendDateFrom" nillable="true" type="xsd:dateTime"/>
+     <element name="messageSendDateTo" nillable="true" type="xsd:dateTime"/>
+     <element name="messageStatus" nillable="true" type="xsd:string"/>
+     <element name="messageSubject" nillable="true" type="xsd:string"/>
+     <element name="messageType" nillable="true" type="xsd:string"/>
+     <element name="sortAscending" nillable="true" type="xsd:boolean"/>
+     <element name="sortProperty" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="lookupMessagesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="lookupMessagesReturn" type="impl:MessageInfo"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="MessageInfo">
+    <sequence>
+     <element name="actualRecipientCount" type="xsd:int"/>
+     <element name="authorId" nillable="true" type="xsd:string"/>
+     <element name="bounceCount" type="xsd:int"/>
+     <element name="clickRate" type="xsd:float"/>
+     <element name="clickerCount" type="xsd:int"/>
+     <element name="creationDate" nillable="true" type="xsd:dateTime"/>
+     <element name="forwardCount" type="xsd:int"/>
+     <element name="groupId" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="openRate" type="xsd:float"/>
+     <element name="readerCount" type="xsd:int"/>
+     <element name="recipientCount" type="xsd:int"/>
+     <element name="sendDate" nillable="true" type="xsd:dateTime"/>
+     <element name="sendoutProgress" type="xsd:float"/>
+     <element name="size" type="xsd:long"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+     <element name="subject" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="unsubscriptionCount" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="lookupGroups">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="lookupParams" type="impl:GroupLookupParams"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="GroupLookupParams">
+    <sequence>
+     <element name="batchOffset" nillable="true" type="xsd:int"/>
+     <element name="batchSize" nillable="true" type="xsd:int"/>
+     <element name="groupName" nillable="true" type="xsd:string"/>
+     <element name="sortAscending" nillable="true" type="xsd:boolean"/>
+     <element name="sortProperty" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="lookupGroupsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="lookupGroupsReturn" type="impl:GroupCore"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="GroupCore">
+    <sequence>
+     <element name="ISOCountryCode" nillable="true" type="xsd:string"/>
+     <element name="ISOLanguageCode" nillable="true" type="xsd:string"/>
+     <element name="archived" type="xsd:boolean"/>
+     <element name="categoryId" nillable="true" type="xsd:string"/>
+     <element name="creationDate" nillable="true" type="xsd:dateTime"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="noOfBouncedMembers" type="xsd:int"/>
+     <element name="noOfMembers" type="xsd:int"/>
+     <element name="noOfMessages" type="xsd:int"/>
+     <element name="noOfModMembers" type="xsd:int"/>
+     <element name="noOfModMessages" type="xsd:int"/>
+     <element name="ownerEmail" nillable="true" type="xsd:string"/>
+     <element name="ownerFirstname" nillable="true" type="xsd:string"/>
+     <element name="ownerLastname" nillable="true" type="xsd:string"/>
+     <element name="ownerPK" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="createMember">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="invite" type="xsd:boolean"/>
+      <element name="sendMessage" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createMemberResponse">
+    <complexType>
+     <sequence>
+      <element name="createMemberReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserById">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupUserByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupUserByIdReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByEmailReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByEmail_v2_0">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="onlyActive" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByEmail_v2_0Response">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByEmail_v2_0Return" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberById">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="memberid" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByIdResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByIdReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberById_v2_0">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="memberid" type="xsd:string"/>
+      <element name="onlyActive" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberById_v2_0Response">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberById_v2_0Return" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByIdentifier">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="identifier" type="xsd:string"/>
+      <element name="onlyActive" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByIdentifierResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByIdentifierReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByUserId">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupid" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByUserIdResponse">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByUserIdReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByUserId_v2_0">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupid" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+      <element name="onlyActive" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupMemberByUserId_v2_0Response">
+    <complexType>
+     <sequence>
+      <element name="lookupMemberByUserId_v2_0Return" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateMember">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="memberXmlSpec" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateMemberResponse">
+    <complexType>
+     <sequence>
+      <element name="updateMemberReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateUser">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userXmlSpec" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateUserResponse">
+    <complexType>
+     <sequence>
+      <element name="updateUserReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateUserByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userXmlSpec" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateUserByEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="updateUserByEmailReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteUser">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteUserResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteUserReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteMember">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="memberId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteMemberResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteMemberReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="unsubscribeMemberByEmail">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="sendMessage" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="unsubscribeMemberByEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="unsubscribeMemberByEmailReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteMessage">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="messageId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteMessageResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteMessageReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cloneGroup">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="templateGroupId" type="xsd:string"/>
+      <element name="newGroupEmail" type="xsd:string"/>
+      <element name="newGroupName" type="xsd:string"/>
+      <element name="keepOwner" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cloneGroupResponse">
+    <complexType>
+     <sequence>
+      <element name="cloneGroupReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="changeGroupSettings">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+      <element name="prefix" type="xsd:string"/>
+      <element name="textFooter" type="xsd:string"/>
+      <element name="textHeader" type="xsd:string"/>
+      <element name="htmlFooter" type="xsd:string"/>
+      <element name="htmlHeader" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="changeGroupSettingsResponse">
+    <complexType/>
+   </element>
+   <element name="setGroupProperty">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="gid" type="xsd:string"/>
+      <element name="name" type="xsd:string"/>
+      <element name="value" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setGroupPropertyResponse">
+    <complexType/>
+   </element>
+   <element name="getGroupProperty">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="gid" type="xsd:string"/>
+      <element name="name" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getGroupPropertyResponse">
+    <complexType>
+     <sequence>
+      <element name="getGroupPropertyReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="copyAndSendDraftMessage">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="messageId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="copyAndSendDraftMessageResponse">
+    <complexType>
+     <sequence>
+      <element name="copyAndSendDraftMessageReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendSingleMessageToUser">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="singleMessageId" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendSingleMessageToUserResponse">
+    <complexType/>
+   </element>
+   <element name="sendParametrizedSingleMessageToUser">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="singleMessageId" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="names" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="values" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendParametrizedSingleMessageToUserResponse">
+    <complexType/>
+   </element>
+   <element name="sendGroupMessageToUser">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupid" type="xsd:string"/>
+      <element name="messageId" type="xsd:string"/>
+      <element name="userId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendGroupMessageToUserResponse">
+    <complexType/>
+   </element>
+   <element name="deleteGroup">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteGroupResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteGroupReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendEmailToMe">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="subject" type="xsd:string"/>
+      <element name="message" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendEmailToMeResponse">
+    <complexType/>
+   </element>
+   <element name="addToBlacklist">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addToBlacklistResponse">
+    <complexType>
+     <sequence>
+      <element name="addToBlacklistReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isEmailOnSystemBlacklist">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isEmailOnSystemBlacklistResponse">
+    <complexType>
+     <sequence>
+      <element name="isEmailOnSystemBlacklistReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isEmailBouncedSystemwide">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isEmailBouncedSystemwideResponse">
+    <complexType>
+     <sequence>
+      <element name="isEmailBouncedSystemwideReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeFromBlacklist">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupId" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeFromBlacklistResponse">
+    <complexType>
+     <sequence>
+      <element name="removeFromBlacklistReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateGroup">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="groupXML" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createOrUpdateGroupResponse">
+    <complexType>
+     <sequence>
+      <element name="createOrUpdateGroupReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupHourlyMessageStats">
+    <complexType>
+     <sequence>
+      <element name="session" type="xsd:string"/>
+      <element name="messageid" type="xsd:string"/>
+      <element name="periodStartDate" type="xsd:dateTime"/>
+      <element name="periodEndDate" type="xsd:dateTime"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="lookupHourlyMessageStatsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="lookupHourlyMessageStatsReturn" type="impl:HourlyMessageStats"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="HourlyMessageStats">
+    <sequence>
+     <element name="hour" nillable="true" type="xsd:dateTime"/>
+     <element name="noOfBounces" type="xsd:int"/>
+     <element name="noOfClicks" type="xsd:int"/>
+     <element name="noOfOpenings" type="xsd:int"/>
+     <element name="noOfUnsubscriptions" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="lookupUserByIdentifierResponse">
+
+      <wsdl:part element="impl:lookupUserByIdentifierResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByMobileNumberRequest">
+
+      <wsdl:part element="impl:lookupUserByMobileNumber" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="unsubscribeMemberByEmailResponse">
+
+      <wsdl:part element="impl:unsubscribeMemberByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByIdResponse">
+
+      <wsdl:part element="impl:lookupUserByIdResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setGroupPropertyResponse">
+
+      <wsdl:part element="impl:setGroupPropertyResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupHourlyMessageStatsRequest">
+
+      <wsdl:part element="impl:lookupHourlyMessageStats" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateUserMemberByEmailResponse">
+
+      <wsdl:part element="impl:createOrUpdateUserMemberByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupGroupsRequest">
+
+      <wsdl:part element="impl:lookupGroups" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateUserMemberByEmailRequest">
+
+      <wsdl:part element="impl:createOrUpdateUserMemberByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByEmailResponse">
+
+      <wsdl:part element="impl:lookupUserByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSingleMessageToUserResponse">
+
+      <wsdl:part element="impl:sendSingleMessageToUserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByEmailRequest">
+
+      <wsdl:part element="impl:lookupMemberByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="changeGroupSettingsRequest">
+
+      <wsdl:part element="impl:changeGroupSettings" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserByEmailRequest">
+
+      <wsdl:part element="impl:updateUserByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserByEmailResponse">
+
+      <wsdl:part element="impl:updateUserByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByMobileNumberResponse">
+
+      <wsdl:part element="impl:lookupMemberByMobileNumberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEmailBouncedSystemwideRequest">
+
+      <wsdl:part element="impl:isEmailBouncedSystemwide" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByIdRequest">
+
+      <wsdl:part element="impl:lookupUserById" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setAsynchronousRequest">
+
+      <wsdl:part element="impl:setAsynchronous" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getGroupPropertyResponse">
+
+      <wsdl:part element="impl:getGroupPropertyResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByIdentifierRequest">
+
+      <wsdl:part element="impl:lookupMemberByIdentifier" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="logoutRequest">
+
+      <wsdl:part element="impl:logout" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendSingleMessageToUserRequest">
+
+      <wsdl:part element="impl:sendSingleMessageToUser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByIdResponse">
+
+      <wsdl:part element="impl:lookupMemberByIdResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createMemberRequest">
+
+      <wsdl:part element="impl:createMember" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendParametrizedSingleMessageToUserRequest">
+
+      <wsdl:part element="impl:sendParametrizedSingleMessageToUser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByMobileNumberResponse">
+
+      <wsdl:part element="impl:lookupUserByMobileNumberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="logoutResponse">
+
+      <wsdl:part element="impl:logoutResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByIdentifierRequest">
+
+      <wsdl:part element="impl:lookupUserByIdentifier" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVersionResponse">
+
+      <wsdl:part element="impl:getVersionResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByUserId_v2_0Response">
+
+      <wsdl:part element="impl:lookupMemberByUserId_v2_0Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setAsynchronousResponse">
+
+      <wsdl:part element="impl:setAsynchronousResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="copyAndSendDraftMessageRequest">
+
+      <wsdl:part element="impl:copyAndSendDraftMessage" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendEmailToMeResponse">
+
+      <wsdl:part element="impl:sendEmailToMeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="copyAndSendDraftMessageResponse">
+
+      <wsdl:part element="impl:copyAndSendDraftMessageResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserRequest">
+
+      <wsdl:part element="impl:deleteUser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupHourlyMessageStatsResponse">
+
+      <wsdl:part element="impl:lookupHourlyMessageStatsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="logonResponse">
+
+      <wsdl:part element="impl:logonResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByFaxNumberResponse">
+
+      <wsdl:part element="impl:lookupUserByFaxNumberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByEmailRequest">
+
+      <wsdl:part element="impl:lookupUserByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteMemberResponse">
+
+      <wsdl:part element="impl:deleteMemberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateGroupRequest">
+
+      <wsdl:part element="impl:createOrUpdateGroup" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="changeGroupSettingsResponse">
+
+      <wsdl:part element="impl:changeGroupSettingsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createMemberResponse">
+
+      <wsdl:part element="impl:createMemberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserResponse">
+
+      <wsdl:part element="impl:deleteUserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addToBlacklistResponse">
+
+      <wsdl:part element="impl:addToBlacklistResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserRequest">
+
+      <wsdl:part element="impl:updateUser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteMessageRequest">
+
+      <wsdl:part element="impl:deleteMessage" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateUserByEmailResponse">
+
+      <wsdl:part element="impl:createOrUpdateUserByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByMobileNumberRequest">
+
+      <wsdl:part element="impl:lookupMemberByMobileNumber" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByUserId_v2_0Request">
+
+      <wsdl:part element="impl:lookupMemberByUserId_v2_0" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteMessageResponse">
+
+      <wsdl:part element="impl:deleteMessageResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setGroupPropertyRequest">
+
+      <wsdl:part element="impl:setGroupProperty" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMessagesResponse">
+
+      <wsdl:part element="impl:lookupMessagesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupUserByFaxNumberRequest">
+
+      <wsdl:part element="impl:lookupUserByFaxNumber" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="EcMException">
+
+      <wsdl:part element="impl:fault" name="fault"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserByEmailResponse">
+
+      <wsdl:part element="impl:deleteUserByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByIdentifierResponse">
+
+      <wsdl:part element="impl:lookupMemberByIdentifierResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendParametrizedSingleMessageToUserResponse">
+
+      <wsdl:part element="impl:sendParametrizedSingleMessageToUserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteGroupResponse">
+
+      <wsdl:part element="impl:deleteGroupResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateUserResponse">
+
+      <wsdl:part element="impl:updateUserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendGroupMessageToUserResponse">
+
+      <wsdl:part element="impl:sendGroupMessageToUserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByIdRequest">
+
+      <wsdl:part element="impl:lookupMemberById" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateMemberResponse">
+
+      <wsdl:part element="impl:updateMemberResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="unsubscribeMemberByEmailRequest">
+
+      <wsdl:part element="impl:unsubscribeMemberByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByEmailResponse">
+
+      <wsdl:part element="impl:lookupMemberByEmailResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUserByEmailRequest">
+
+      <wsdl:part element="impl:deleteUserByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addToBlacklistRequest">
+
+      <wsdl:part element="impl:addToBlacklist" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getGroupIdResponse">
+
+      <wsdl:part element="impl:getGroupIdResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberById_v2_0Response">
+
+      <wsdl:part element="impl:lookupMemberById_v2_0Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="cloneGroupRequest">
+
+      <wsdl:part element="impl:cloneGroup" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendGroupMessageToUserRequest">
+
+      <wsdl:part element="impl:sendGroupMessageToUser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEmailOnSystemBlacklistResponse">
+
+      <wsdl:part element="impl:isEmailOnSystemBlacklistResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByEmail_v2_0Request">
+
+      <wsdl:part element="impl:lookupMemberByEmail_v2_0" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateUserByEmailRequest">
+
+      <wsdl:part element="impl:createOrUpdateUserByEmail" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEmailOnSystemBlacklistRequest">
+
+      <wsdl:part element="impl:isEmailOnSystemBlacklist" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrUpdateGroupResponse">
+
+      <wsdl:part element="impl:createOrUpdateGroupResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByUserIdRequest">
+
+      <wsdl:part element="impl:lookupMemberByUserId" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getGroupPropertyRequest">
+
+      <wsdl:part element="impl:getGroupProperty" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberById_v2_0Request">
+
+      <wsdl:part element="impl:lookupMemberById_v2_0" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createUserResponse">
+
+      <wsdl:part element="impl:createUserResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVersionRequest">
+
+      <wsdl:part element="impl:getVersion" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="createUserRequest">
+
+      <wsdl:part element="impl:createUser" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteMemberRequest">
+
+      <wsdl:part element="impl:deleteMember" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeFromBlacklistRequest">
+
+      <wsdl:part element="impl:removeFromBlacklist" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMessagesRequest">
+
+      <wsdl:part element="impl:lookupMessages" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupGroupsResponse">
+
+      <wsdl:part element="impl:lookupGroupsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendEmailToMeRequest">
+
+      <wsdl:part element="impl:sendEmailToMe" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getGroupIdRequest">
+
+      <wsdl:part element="impl:getGroupId" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeFromBlacklistResponse">
+
+      <wsdl:part element="impl:removeFromBlacklistResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByUserIdResponse">
+
+      <wsdl:part element="impl:lookupMemberByUserIdResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="lookupMemberByEmail_v2_0Response">
+
+      <wsdl:part element="impl:lookupMemberByEmail_v2_0Response" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateMemberRequest">
+
+      <wsdl:part element="impl:updateMember" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteGroupRequest">
+
+      <wsdl:part element="impl:deleteGroup" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="cloneGroupResponse">
+
+      <wsdl:part element="impl:cloneGroupResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="logonRequest">
+
+      <wsdl:part element="impl:logon" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="isEmailBouncedSystemwideResponse">
+
+      <wsdl:part element="impl:isEmailBouncedSystemwideResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EcMSoapBridge">
+
+      <wsdl:operation name="getVersion">
+
+         <wsdl:input message="impl:getVersionRequest" name="getVersionRequest"/>
+
+         <wsdl:output message="impl:getVersionResponse" name="getVersionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getGroupId">
+
+         <wsdl:input message="impl:getGroupIdRequest" name="getGroupIdRequest"/>
+
+         <wsdl:output message="impl:getGroupIdResponse" name="getGroupIdResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logon">
+
+         <wsdl:input message="impl:logonRequest" name="logonRequest"/>
+
+         <wsdl:output message="impl:logonResponse" name="logonResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logout">
+
+         <wsdl:input message="impl:logoutRequest" name="logoutRequest"/>
+
+         <wsdl:output message="impl:logoutResponse" name="logoutResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAsynchronous">
+
+         <wsdl:input message="impl:setAsynchronousRequest" name="setAsynchronousRequest"/>
+
+         <wsdl:output message="impl:setAsynchronousResponse" name="setAsynchronousResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createUser">
+
+         <wsdl:input message="impl:createUserRequest" name="createUserRequest"/>
+
+         <wsdl:output message="impl:createUserResponse" name="createUserResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateUserByEmail">
+
+         <wsdl:input message="impl:createOrUpdateUserByEmailRequest" name="createOrUpdateUserByEmailRequest"/>
+
+         <wsdl:output message="impl:createOrUpdateUserByEmailResponse" name="createOrUpdateUserByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateUserMemberByEmail">
+
+         <wsdl:input message="impl:createOrUpdateUserMemberByEmailRequest" name="createOrUpdateUserMemberByEmailRequest"/>
+
+         <wsdl:output message="impl:createOrUpdateUserMemberByEmailResponse" name="createOrUpdateUserMemberByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUserByEmail">
+
+         <wsdl:input message="impl:deleteUserByEmailRequest" name="deleteUserByEmailRequest"/>
+
+         <wsdl:output message="impl:deleteUserByEmailResponse" name="deleteUserByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByEmail">
+
+         <wsdl:input message="impl:lookupUserByEmailRequest" name="lookupUserByEmailRequest"/>
+
+         <wsdl:output message="impl:lookupUserByEmailResponse" name="lookupUserByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByIdentifier">
+
+         <wsdl:input message="impl:lookupUserByIdentifierRequest" name="lookupUserByIdentifierRequest"/>
+
+         <wsdl:output message="impl:lookupUserByIdentifierResponse" name="lookupUserByIdentifierResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByMobileNumber">
+
+         <wsdl:input message="impl:lookupUserByMobileNumberRequest" name="lookupUserByMobileNumberRequest"/>
+
+         <wsdl:output message="impl:lookupUserByMobileNumberResponse" name="lookupUserByMobileNumberResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByMobileNumber">
+
+         <wsdl:input message="impl:lookupMemberByMobileNumberRequest" name="lookupMemberByMobileNumberRequest"/>
+
+         <wsdl:output message="impl:lookupMemberByMobileNumberResponse" name="lookupMemberByMobileNumberResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByFaxNumber">
+
+         <wsdl:input message="impl:lookupUserByFaxNumberRequest" name="lookupUserByFaxNumberRequest"/>
+
+         <wsdl:output message="impl:lookupUserByFaxNumberResponse" name="lookupUserByFaxNumberResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMessages">
+
+         <wsdl:input message="impl:lookupMessagesRequest" name="lookupMessagesRequest"/>
+
+         <wsdl:output message="impl:lookupMessagesResponse" name="lookupMessagesResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupGroups">
+
+         <wsdl:input message="impl:lookupGroupsRequest" name="lookupGroupsRequest"/>
+
+         <wsdl:output message="impl:lookupGroupsResponse" name="lookupGroupsResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createMember">
+
+         <wsdl:input message="impl:createMemberRequest" name="createMemberRequest"/>
+
+         <wsdl:output message="impl:createMemberResponse" name="createMemberResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserById">
+
+         <wsdl:input message="impl:lookupUserByIdRequest" name="lookupUserByIdRequest"/>
+
+         <wsdl:output message="impl:lookupUserByIdResponse" name="lookupUserByIdResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByEmail">
+
+         <wsdl:input message="impl:lookupMemberByEmailRequest" name="lookupMemberByEmailRequest"/>
+
+         <wsdl:output message="impl:lookupMemberByEmailResponse" name="lookupMemberByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByEmail_v2_0">
+
+         <wsdl:input message="impl:lookupMemberByEmail_v2_0Request" name="lookupMemberByEmail_v2_0Request"/>
+
+         <wsdl:output message="impl:lookupMemberByEmail_v2_0Response" name="lookupMemberByEmail_v2_0Response"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberById">
+
+         <wsdl:input message="impl:lookupMemberByIdRequest" name="lookupMemberByIdRequest"/>
+
+         <wsdl:output message="impl:lookupMemberByIdResponse" name="lookupMemberByIdResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberById_v2_0">
+
+         <wsdl:input message="impl:lookupMemberById_v2_0Request" name="lookupMemberById_v2_0Request"/>
+
+         <wsdl:output message="impl:lookupMemberById_v2_0Response" name="lookupMemberById_v2_0Response"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByIdentifier">
+
+         <wsdl:input message="impl:lookupMemberByIdentifierRequest" name="lookupMemberByIdentifierRequest"/>
+
+         <wsdl:output message="impl:lookupMemberByIdentifierResponse" name="lookupMemberByIdentifierResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByUserId">
+
+         <wsdl:input message="impl:lookupMemberByUserIdRequest" name="lookupMemberByUserIdRequest"/>
+
+         <wsdl:output message="impl:lookupMemberByUserIdResponse" name="lookupMemberByUserIdResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByUserId_v2_0">
+
+         <wsdl:input message="impl:lookupMemberByUserId_v2_0Request" name="lookupMemberByUserId_v2_0Request"/>
+
+         <wsdl:output message="impl:lookupMemberByUserId_v2_0Response" name="lookupMemberByUserId_v2_0Response"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateMember">
+
+         <wsdl:input message="impl:updateMemberRequest" name="updateMemberRequest"/>
+
+         <wsdl:output message="impl:updateMemberResponse" name="updateMemberResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUser">
+
+         <wsdl:input message="impl:updateUserRequest" name="updateUserRequest"/>
+
+         <wsdl:output message="impl:updateUserResponse" name="updateUserResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUserByEmail">
+
+         <wsdl:input message="impl:updateUserByEmailRequest" name="updateUserByEmailRequest"/>
+
+         <wsdl:output message="impl:updateUserByEmailResponse" name="updateUserByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUser">
+
+         <wsdl:input message="impl:deleteUserRequest" name="deleteUserRequest"/>
+
+         <wsdl:output message="impl:deleteUserResponse" name="deleteUserResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteMember">
+
+         <wsdl:input message="impl:deleteMemberRequest" name="deleteMemberRequest"/>
+
+         <wsdl:output message="impl:deleteMemberResponse" name="deleteMemberResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="unsubscribeMemberByEmail">
+
+         <wsdl:input message="impl:unsubscribeMemberByEmailRequest" name="unsubscribeMemberByEmailRequest"/>
+
+         <wsdl:output message="impl:unsubscribeMemberByEmailResponse" name="unsubscribeMemberByEmailResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteMessage">
+
+         <wsdl:input message="impl:deleteMessageRequest" name="deleteMessageRequest"/>
+
+         <wsdl:output message="impl:deleteMessageResponse" name="deleteMessageResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cloneGroup">
+
+         <wsdl:input message="impl:cloneGroupRequest" name="cloneGroupRequest"/>
+
+         <wsdl:output message="impl:cloneGroupResponse" name="cloneGroupResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="changeGroupSettings">
+
+         <wsdl:input message="impl:changeGroupSettingsRequest" name="changeGroupSettingsRequest"/>
+
+         <wsdl:output message="impl:changeGroupSettingsResponse" name="changeGroupSettingsResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setGroupProperty">
+
+         <wsdl:input message="impl:setGroupPropertyRequest" name="setGroupPropertyRequest"/>
+
+         <wsdl:output message="impl:setGroupPropertyResponse" name="setGroupPropertyResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getGroupProperty">
+
+         <wsdl:input message="impl:getGroupPropertyRequest" name="getGroupPropertyRequest"/>
+
+         <wsdl:output message="impl:getGroupPropertyResponse" name="getGroupPropertyResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="copyAndSendDraftMessage">
+
+         <wsdl:input message="impl:copyAndSendDraftMessageRequest" name="copyAndSendDraftMessageRequest"/>
+
+         <wsdl:output message="impl:copyAndSendDraftMessageResponse" name="copyAndSendDraftMessageResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendSingleMessageToUser">
+
+         <wsdl:input message="impl:sendSingleMessageToUserRequest" name="sendSingleMessageToUserRequest"/>
+
+         <wsdl:output message="impl:sendSingleMessageToUserResponse" name="sendSingleMessageToUserResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendParametrizedSingleMessageToUser">
+
+         <wsdl:input message="impl:sendParametrizedSingleMessageToUserRequest" name="sendParametrizedSingleMessageToUserRequest"/>
+
+         <wsdl:output message="impl:sendParametrizedSingleMessageToUserResponse" name="sendParametrizedSingleMessageToUserResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendGroupMessageToUser">
+
+         <wsdl:input message="impl:sendGroupMessageToUserRequest" name="sendGroupMessageToUserRequest"/>
+
+         <wsdl:output message="impl:sendGroupMessageToUserResponse" name="sendGroupMessageToUserResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroup">
+
+         <wsdl:input message="impl:deleteGroupRequest" name="deleteGroupRequest"/>
+
+         <wsdl:output message="impl:deleteGroupResponse" name="deleteGroupResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendEmailToMe">
+
+         <wsdl:input message="impl:sendEmailToMeRequest" name="sendEmailToMeRequest"/>
+
+         <wsdl:output message="impl:sendEmailToMeResponse" name="sendEmailToMeResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addToBlacklist">
+
+         <wsdl:input message="impl:addToBlacklistRequest" name="addToBlacklistRequest"/>
+
+         <wsdl:output message="impl:addToBlacklistResponse" name="addToBlacklistResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEmailOnSystemBlacklist">
+
+         <wsdl:input message="impl:isEmailOnSystemBlacklistRequest" name="isEmailOnSystemBlacklistRequest"/>
+
+         <wsdl:output message="impl:isEmailOnSystemBlacklistResponse" name="isEmailOnSystemBlacklistResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEmailBouncedSystemwide">
+
+         <wsdl:input message="impl:isEmailBouncedSystemwideRequest" name="isEmailBouncedSystemwideRequest"/>
+
+         <wsdl:output message="impl:isEmailBouncedSystemwideResponse" name="isEmailBouncedSystemwideResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeFromBlacklist">
+
+         <wsdl:input message="impl:removeFromBlacklistRequest" name="removeFromBlacklistRequest"/>
+
+         <wsdl:output message="impl:removeFromBlacklistResponse" name="removeFromBlacklistResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateGroup">
+
+         <wsdl:input message="impl:createOrUpdateGroupRequest" name="createOrUpdateGroupRequest"/>
+
+         <wsdl:output message="impl:createOrUpdateGroupResponse" name="createOrUpdateGroupResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupHourlyMessageStats">
+
+         <wsdl:input message="impl:lookupHourlyMessageStatsRequest" name="lookupHourlyMessageStatsRequest"/>
+
+         <wsdl:output message="impl:lookupHourlyMessageStatsResponse" name="lookupHourlyMessageStatsResponse"/>
+
+         <wsdl:fault message="impl:EcMException" name="EcMException"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="rpcSoapBinding" type="impl:EcMSoapBridge">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getVersion">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getVersionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getVersionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getGroupId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getGroupIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getGroupIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logon">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="logonRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="logonResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logout">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="logoutRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="logoutResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAsynchronous">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setAsynchronousRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setAsynchronousResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateUserByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createOrUpdateUserByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createOrUpdateUserByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateUserMemberByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createOrUpdateUserMemberByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createOrUpdateUserMemberByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUserByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteUserByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteUserByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupUserByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupUserByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByIdentifier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupUserByIdentifierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupUserByIdentifierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByMobileNumber">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupUserByMobileNumberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupUserByMobileNumberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByMobileNumber">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByMobileNumberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByMobileNumberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserByFaxNumber">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupUserByFaxNumberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupUserByFaxNumberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMessages">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMessagesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMessagesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupGroups">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupGroupsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupGroupsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createMember">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createMemberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createMemberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupUserById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupUserByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupUserByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByEmail_v2_0">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByEmail_v2_0Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByEmail_v2_0Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberById">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberById_v2_0">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberById_v2_0Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberById_v2_0Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByIdentifier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByIdentifierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByIdentifierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByUserId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByUserIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByUserIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupMemberByUserId_v2_0">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupMemberByUserId_v2_0Request">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupMemberByUserId_v2_0Response">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateMember">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateMemberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateMemberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateUserByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateUserByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateUserByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteMember">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteMemberRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteMemberResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="unsubscribeMemberByEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="unsubscribeMemberByEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="unsubscribeMemberByEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteMessage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteMessageRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteMessageResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cloneGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="cloneGroupRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cloneGroupResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="changeGroupSettings">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="changeGroupSettingsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="changeGroupSettingsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setGroupProperty">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setGroupPropertyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setGroupPropertyResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getGroupProperty">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getGroupPropertyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getGroupPropertyResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="copyAndSendDraftMessage">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="copyAndSendDraftMessageRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="copyAndSendDraftMessageResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendSingleMessageToUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendSingleMessageToUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendSingleMessageToUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendParametrizedSingleMessageToUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendParametrizedSingleMessageToUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendParametrizedSingleMessageToUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendGroupMessageToUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendGroupMessageToUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendGroupMessageToUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteGroupRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteGroupResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="sendEmailToMe">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendEmailToMeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendEmailToMeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addToBlacklist">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addToBlacklistRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addToBlacklistResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEmailOnSystemBlacklist">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isEmailOnSystemBlacklistRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isEmailOnSystemBlacklistResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isEmailBouncedSystemwide">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isEmailBouncedSystemwideRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isEmailBouncedSystemwideResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeFromBlacklist">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeFromBlacklistRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeFromBlacklistResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrUpdateGroup">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createOrUpdateGroupRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createOrUpdateGroupResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lookupHourlyMessageStats">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="lookupHourlyMessageStatsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="lookupHourlyMessageStatsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="EcMException">
+
+            <wsdlsoap:fault name="EcMException" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EcMSoapBridgeService">
+
+      <wsdl:port binding="impl:rpcSoapBinding" name="rpc">
+
+         <wsdlsoap:address location="http://webservices.ecircle-ag.com/rpc"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
