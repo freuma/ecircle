@@ -12,9 +12,9 @@ module Ecircle
     
     class << self
       def authenticate(ecmessenger_url, username, password)
-        wsdl = "http://webservices.ecircle-ag.com/soap/ecm.wsdl"
+        require File.expand_path(File.dirname(__FILE__) + '/../synchronous/synchronousDriver')           
         api = self.new
-        api.driver = SOAP::WSDLDriverFactory.new(wsdl).create_rpc_driver
+        api.driver = EcMSoapBridge.new
         api.session = api.driver.logon(:realm => ecmessenger_url, :user => username, :passwd => password).logonReturn
         api
       end
