@@ -23,8 +23,10 @@ module Ecircle
     
     class Member < API        
       attr_accessor :doc
+      attr_accessor :email
       
       def find_by_email(email)
+        self.email = email
         self.doc = Hpricot.XML(driver.lookupUserByEmail(:session => session, :email => email).lookupUserByEmailReturn)
         self
       end
@@ -37,8 +39,8 @@ module Ecircle
         (@doc/"lastname").inner_html.to_s
       end
       
-      def unsubscribe 
-        
+      def unsubscribe(group_id = '', sendMessage = false)
+        driver.unsubscribeMemberByEmail(:session => session, :email => email, :groupId => group_id, :sendMessage => false).unsubscribeMemberByEmailResponse
       end
     end
     
