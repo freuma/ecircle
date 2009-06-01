@@ -71,6 +71,9 @@ module Ecircle
           standard_attributes.each do |attribute|  
             eval("user.#{attribute}('#{self.send(attribute)}')")
           end
+          custom_atributes.each do |attribute| 
+            user.namedattr({:name => attribute}, self.send(attribute))
+          end
         end
       end
       

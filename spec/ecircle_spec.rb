@@ -16,7 +16,7 @@ describe "Ecircle" do
     @matt.FullName.should eql("Matt Fawcett")
   end
   
-  it "should allow me to update the first name" do
+  it "should allow me to update a standard attribute" do
     #update the name
     @matt.firstname = "New name"
     @matt.save
@@ -25,6 +25,18 @@ describe "Ecircle" do
     @matt.firstname.should eql("New name")
     #Now reset it back again for future tests
     @matt.firstname = "Matt"
+    @matt.save
+  end
+  
+  it "should allow me to update a custom attribute" do
+    #update the name
+    @matt.FullName = "New full name"
+    @matt.save
+    #now refresh and make sure its changed
+    @matt = @api.find_by_email("mail@matthewfawcett.co.uk")
+    @matt.FullName.should eql("New full name")
+    #Now reset it back again for future tests
+    @matt.FullName = "Matt Fawcett"
     @matt.save
   end
   
