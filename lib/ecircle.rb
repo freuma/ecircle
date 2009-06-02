@@ -31,6 +31,10 @@ module Ecircle
         self.doc = Hpricot.XML(driver.lookupUserByEmail(:session => session, :email => email).lookupUserByEmailReturn)
         self
       end
+      
+      def id
+        (@doc/"user").first.attributes['id'].to_i
+      end
     
       
       def method_missing(method_name, *args)
@@ -78,7 +82,7 @@ module Ecircle
       end
       
       def custom_atributes
-        (@doc/"namedattr").collect { |field| field.attributes['name'].to_sym }         
+        @custom_atributes ||= (@doc/"namedattr").collect { |field| field.attributes['name'].to_sym }         
       end
       
       def standard_attributes
@@ -86,9 +90,16 @@ module Ecircle
          :cust_attr_0, :cust_attr_1, :cust_attr_2, :cust_attr_3, :cust_attr_4, :cust_attr_5, :cust_attr_6, :cust_attr_7,
          :cust_attr_8, :cust_attr_9]
       end
-
-    end
-    
+      
+      def send_message(message_id)
+        driver.sendParametrizedSingleMessageToUser(:session => session,
+                                                   :singleMessageId => message_id,
+                                                   :userId => self.id,
+                                                   :names => "",
+                                                   :values => "")
+        
+      end
+    end    
   end
   
   

@@ -16,6 +16,10 @@ describe "Ecircle" do
     @matt.FullName.should eql("Matt Fawcett")
   end
   
+  it "should give me asccess to the user id" do
+    @matt.id.should eql(3500322370)
+  end
+  
   it "should allow me to update a standard attribute" do
     #update the name
     @matt.firstname = "New name"
@@ -58,6 +62,12 @@ describe "Ecircle" do
       @matt.custom_atributes.should include(:ask_list_id)
       @matt.custom_atributes.should include(:ask_source_description)
       @matt.custom_atributes.should include(:xLanguage)
+    end
+  end
+  
+  describe "send_message" do
+    it "should send a message to the user" do
+      @matt.send_message(351197566).should be_true
     end
   end
 
