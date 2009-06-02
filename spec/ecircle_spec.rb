@@ -12,6 +12,11 @@ describe "Ecircle" do
     @matt.lastname.should eql("Fawcett")
   end
   
+  it "should return nil if the user is not found" do
+    @fake = @api.find_by_email("fakeuser123588@fakedomain.com")
+    @fake.should be_nil
+  end
+  
   it "should allow me access to custom attributes" do
     @matt.FullName.should eql("Matt Fawcett")
   end
@@ -69,6 +74,27 @@ describe "Ecircle" do
     it "should send a message to the user" do
       @matt.send_message(351197566).should be_true
     end
+  end
+  
+  describe "creating a new user" do
+    it "should craete an instance of a new user with standard and custom attributes" do
+      @unique = Time.now.to_i + rand(1000)
+      @user = @api.new(:email => "user_#{@unique}@matthewfawcett.co.uk", :firstname => "FN#{@unique}", :FullName => "Full Name #{@unique}")
+      @user.firstname.should eql("FN#{@unique}")
+      @user.FullName.should eql("Full Name #{@unique}")
+    end
+    
+    it "should give me an xml document for the unsaved user" do
+      @unique = Time.now.to_i + rand(1000)
+      @user = @api.new(:email => "user_#{@unique}@matthewfawcett.co.uk", :firstname => "FN#{@unique}", :FullName => "Full Name #{@unique}")
+      @user.to_xml.should eql("")
+    end
+    
+    # it "should allow me to save an instance of a new user and the user should then be on ecircle" do
+    #   @unique = Time.now.to_i + rand(1000)
+    #   @user = @api.new(:email => "user_#{@unique}@matthewfawcett.co.uk", :firstname => "FN#{@unique}", :FullName => "Full Name #{@unique}")
+    #   @user.save.should be_true
+    # end
   end
 
 end

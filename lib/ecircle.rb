@@ -28,8 +28,10 @@ module Ecircle
       
       def find_by_email(email)
         self.email = email      
-        self.doc = Hpricot.XML(driver.lookupUserByEmail(:session => session, :email => email).lookupUserByEmailReturn)
-        self
+        lookup = driver.lookupUserByEmail(:session => session, :email => email).lookupUserByEmailReturn
+        return nil if lookup.nil?
+        self.doc = Hpricot.XML(lookup)
+        return self
       end
       
       def id
@@ -66,7 +68,19 @@ module Ecircle
       end
       
       def save
-        driver.updateUserByEmail(:session => session, :userXmlSpec => self.to_xml)
+        driver.createOrUpdateUserByEmail(:session => session, :userXmlSpec => self.to_xml, :sendMessage => false)
+      end
+      
+      def new(attributes)
+        attributes.each do |field, value|
+          instance_variable_set("@#{field}", value)
+          unless standard_attributes.include?(field)
+            #must be a custom attribute. Add it to the custom_atributes array
+            @custom_attributes = Array.new if @custom_attributes.nil?
+            @custom_attributes << field
+          end
+        end
+        return self
       end
       
       def to_xml
