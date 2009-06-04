@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'CGI'
 
 describe "Ecircle" do
   before(:each) do

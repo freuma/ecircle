@@ -12,9 +12,9 @@ module Ecircle
     def authenticate(authentication_parameters)
       require File.expand_path(File.dirname(__FILE__) + '/../synchronous/synchronousDriver')           
       self.driver = EcMSoapBridge.new
-      self.session = driver.logon(:realm => authentication_parameters[:ecmessenger_url], 
-                                  :user => authentication_parameters[:ecmessenger_username], 
-                                  :passwd => authentication_parameters[:ecmessenger_password] ).logonReturn
+      self.session = driver.logon(:realm => authentication_parameters['ecmessenger_url'], 
+                                  :user => authentication_parameters['ecmessenger_username'], 
+                                  :passwd => authentication_parameters['ecmessenger_password'] ).logonReturn
     end
   end
     
@@ -27,7 +27,7 @@ module Ecircle
       member = Member.new
       member.authenticate(authentication_parameters)
       member.email = email      
-      lookup = member.driver.lookupMemberByEmail_v2_0(:session => member.session, :email => email, :groupId => groupId, :onlyActive => false).lookupUserByEmailReturn
+      lookup = member.driver.lookupMemberByEmail_v2_0(:session => member.session, :groupId => groupId, :email => email, :onlyActive => false).lookupMemberByEmail_v2_0Return
       return nil if lookup.nil?
       member.doc = Hpricot.XML(lookup)
       member.groupId = groupId
@@ -35,7 +35,7 @@ module Ecircle
     end
     
     def id
-      (@doc/"user").first.attributes['id'].to_i
+      (@doc/"member").first.attributes['id'].to_i
     end
   
     
