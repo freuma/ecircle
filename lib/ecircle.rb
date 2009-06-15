@@ -29,13 +29,14 @@ module Ecircle
       member.email = email      
       lookup = member.driver.lookupMemberByEmail_v2_0(:session => member.session, :groupId => groupId, :email => email, :onlyActive => false).lookupMemberByEmail_v2_0Return
       return nil if lookup.nil?
-      member.doc = Hpricot.XML(lookup)
+      member.doc = Hpricot.XML(lookup)  
+#puts "DOC IS #{member.doc.to_s}"
       member.groupId = groupId
       return member
     end
     
     def id
-      (@doc/"member").first.attributes['id'].to_i
+      @doc.nil? ? nil : (@doc/"member").first.attributes['id'].to_i
     end
   
     
@@ -43,6 +44,9 @@ module Ecircle
       if method_name.to_s =~ /^.*=$/
         return instance_variable_set("@#{method_name.to_s.gsub('=','')}",  args[0])
       else
+        unless instance_variable_get("@#{method_name}").nil?
+          return instance_variable_get("@#{method_name}")           
+        end
         if self.custom_atributes.include?(method_name)
           if element = (@doc/"namedattr[@name='#{method_name}']")
             if element.respond_to?(:inner_html)
@@ -68,35 +72,50 @@ module Ecircle
     end
     
     def save
-      driver.updateUserByEmail(:session => session, :userXmlSpec => to_xml, :sendMessage => false, :groupId => groupId)
+      driver.createOrUpdateUserMemberByEmail(:session => session, :memberXml => self.to_xml, :groupId => groupId, :sendMessage => false)
     end
     
-    def new(attributes)
+    def self.create(attributes, authentication_parameters)
+      member = Member.new
+      member.authenticate(authentication_parameters)
+      
+      #setup default values of the standard attributes any standard 
+      member.standard_attributes.each { |attribute| member.instance_variable_set("@#{attribute}",  "") }
+      
       attributes.each do |field, value|
-        instance_variable_set("@#{field}", value)
-        unless standard_attributes.include?(field)
+        member.instance_variable_set("@#{field}", value)
+        unless member.standard_attributes.include?(field)
           #must be a custom attribute. Add it to the custom_atributes array
           @custom_attributes = Array.new if @custom_attributes.nil?
           @custom_attributes << field
         end
       end
-      return self
+      
+
+      member.set_custom_attributes @custom_attributes
+      member.save
+      return member
     end
     
     def to_xml
       x = Builder::XmlMarkup.new
-      x.user do |user|
+      x.member do |member|
         standard_attributes.each do |attribute|  
-          eval("user.#{attribute}('#{self.send(attribute)}')")
+          val = self.send(attribute)
+          eval("member.#{attribute}('#{self.send(attribute)}')") unless self.id.nil? && self.send(attribute) == '' #if value is blank, only set if updating
         end
         custom_atributes.each do |attribute| 
-          user.namedattr({:name => attribute}, self.send(attribute))
+          member.namedattr({:name => attribute}, self.send(attribute)) unless self.id.nil? && self.send(attribute) == '' #if value is blank, only set if updating
         end
       end
     end
     
     def custom_atributes
       @custom_atributes ||= (@doc/"namedattr").collect { |field| field.attributes['name'].to_sym }         
+    end
+    
+    def set_custom_attributes(attributes)
+      @custom_atributes = attributes
     end
     
     def standard_attributes

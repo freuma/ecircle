@@ -29,10 +29,10 @@ describe "Ecircle" do
     #update the name
     @matt.firstname = "New name"
     @matt.save
-    #now refresh and make sure its changed
+    # #now refresh and make sure its changed
     @matt = Ecircle::Member.find_by_email("mail@matthewfawcett.co.uk", groupId = 351026868, @configuration)
     @matt.firstname.should eql("New name")
-    #Now reset it back again for future tests
+    # #Now reset it back again for future tests
     @matt.firstname = "Matt"
     @matt.save
   end
@@ -78,25 +78,16 @@ describe "Ecircle" do
   
   describe "creating a new user" do    
     it "should craete an instance of a new user with standard and custom attributes" do
-      pending
       @unique = Time.now.to_i + rand(1000)
-      @user = @api.new(:email => "user_#{@unique}@matthewfawcett.co.uk", :firstname => "FN#{@unique}", :FullName => "Full Name #{@unique}")
+      @user = Ecircle::Member.create({:email => "user_#{@unique}@matthewfawcett.co.uk", 
+                                      :firstname => "FN#{@unique}", 
+                                      :FullName => "Full Name #{@unique}",
+                                      :groupId => 351026868}, 
+                                     @configuration)
       @user.firstname.should eql("FN#{@unique}")
       @user.FullName.should eql("Full Name #{@unique}")
     end
-    
-    it "should give me an xml document for the unsaved user" do
-      pending
-      @unique = Time.now.to_i + rand(1000)
-      @user = @api.new(:email => "user_#{@unique}@matthewfawcett.co.uk", :firstname => "FN#{@unique}", :FullName => "Full Name #{@unique}")
-      @user.to_xml.should eql("")
-    end
-    
-    # it "should allow me to save an instance of a new user and the user should then be on ecircle" do
-    #   @unique = Time.now.to_i + rand(1000)
-    #   @user = @api.new(:email => "user_#{@unique}@matthewfawcett.co.uk", :firstname => "FN#{@unique}", :FullName => "Full Name #{@unique}")
-    #   @user.save.should be_true
-    # end
+  
   end
 
 end
