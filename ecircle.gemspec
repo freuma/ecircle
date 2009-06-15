@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README",
      "Rakefile",
+     "VERSION",
+     "ecircle.gemspec",
      "ecm.wsdl",
      "lib/ecircle.rb",
      "spec/ecircle_spec.rb",
@@ -28,7 +30,7 @@ Gem::Specification.new do |s|
      "synchronous/synchronousMappingRegistry.rb"
   ]
   s.has_rdoc = true
-  s.homepage = %q{http://github.com/bolseragency/ecircle}
+  s.homepage = %q{http://github.com/mattfawcett/ecircle}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
