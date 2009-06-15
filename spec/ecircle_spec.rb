@@ -54,7 +54,6 @@ describe "Ecircle" do
     #update the name
     @matt.firstname = ""
     @matt.save
-  puts "ID IS #{@matt.id}"
     # #now refresh and make sure its changed
     @matt = Ecircle::Member.find_by_email("mail@matthewfawcett.co.uk", groupId = 351026868, @configuration)
     @matt.firstname.should eql("")
