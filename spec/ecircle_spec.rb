@@ -49,6 +49,20 @@ describe "Ecircle" do
     @matt.save
   end
   
+  it "should allow me to set an attribute to blank" do
+    pending #Iv emailed Ecircle as it seems to igore blank fields
+    #update the name
+    @matt.firstname = ""
+    @matt.save
+  puts "ID IS #{@matt.id}"
+    # #now refresh and make sure its changed
+    @matt = Ecircle::Member.find_by_email("mail@matthewfawcett.co.uk", groupId = 351026868, @configuration)
+    @matt.firstname.should eql("")
+    # #Now reset it back again for future tests
+    @matt.firstname = "Matt"
+    @matt.save
+  end
+  
   describe "custom_atributes" do
     it "should return an array of custom atributes on the user" do
       @matt.custom_atributes.should include(:Addr1)

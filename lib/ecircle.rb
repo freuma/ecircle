@@ -30,7 +30,6 @@ module Ecircle
       lookup = member.driver.lookupMemberByEmail_v2_0(:session => member.session, :groupId => groupId, :email => email, :onlyActive => false).lookupMemberByEmail_v2_0Return
       return nil if lookup.nil?
       member.doc = Hpricot.XML(lookup)  
-#puts "DOC IS #{member.doc.to_s}"
       member.groupId = groupId
       return member
     end
