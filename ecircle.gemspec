@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{Ruby library to interfac with Ecircle API}
+  s.summary = %q{Ruby library to interface with Ecircle API}
   s.test_files = [
     "spec/ecircle_spec.rb",
      "spec/spec_helper.rb"
