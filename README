@@ -1,7 +1,49 @@
 = ecircle
-An experimental library to access some elements of Ecircle's API
+An experimental library to access some elements of Ecircle's API, in an ActiveRecord style syntax
 
-Under development and not production ready
+This library is in development and not yet used in production, it covers some of the basic features offered by their synchronous API
+
+== Install
+sudo gem install bolseragency-ecircle
+
+== How to use
+require 'rubygems'
+require 'ecircle'
+
+@configuration = {'ecmessenger_url' => 'http://marketing.mydomain.com', 
+                  'ecmessenger_username' => 'myemail@mydomain.com',
+                  'ecmessenger_password' => 'mypassword'}
+
+##############################
+## Find and update a member
+##############################
+
+#Find the person by their email and get a lookup a standard and custom attribute                  
+person = Ecircle::Member.find_by_email("mail@matthewfawcett.co.uk", groupId = 351026868, @configuration)
+person.firstname  #=> Matt
+person.SomeCustomAttribute #=> Blah
+
+#Update some attributes and save
+person.firstname = "New Matt"
+person.SomeCustomAttribute = "New Blah"
+person.save 
+
+
+##############################
+## Create a new member
+##############################    
+person = Ecircle::Member.create({:email => "newuser@matthewfawcett.co.uk", 
+                                 :firstname => "New", 
+                                 :FullName => "User",
+                                 :groupId => 351026868}, 
+                                @configuration)
+                                
+                                
+##############################
+## Send somebody a one off customised email                          
+##############################
+person.send_message(message_id = 351197566)
+
 
 == Copyright
 
