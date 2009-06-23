@@ -41,7 +41,9 @@ module Ecircle
     
     def method_missing(method_name, *args)
       if method_name.to_s =~ /^.*=$/
-        return instance_variable_set("@#{method_name.to_s.gsub('=','')}",  args[0])
+        @changed_attributes = [] if @changed_attributes.nil?
+        @changed_attributes << method_name.to_s.gsub('=','').to_sym
+        return instance_variable_set("@#{method_name.to_s.gsub('=','')}",  args[0])        
       else
         unless instance_variable_get("@#{method_name}").nil?
           return instance_variable_get("@#{method_name}")           
@@ -96,17 +98,22 @@ module Ecircle
       return member
     end
     
-    def to_xml
+    def to_xml      
       x = Builder::XmlMarkup.new
       x.member do |member|
         standard_attributes.each do |attribute|  
           val = self.send(attribute)
-          eval("member.#{attribute}('#{self.send(attribute)}')") unless self.id.nil? && self.send(attribute) == '' #if value is blank, only set if updating
+          eval("member.#{attribute}('#{self.send(attribute)}')") if should_include_field_in_xml?(attribute) #if value is blank, only set if updating
         end
         custom_atributes.each do |attribute| 
-          member.namedattr({:name => attribute}, self.send(attribute)) unless self.id.nil? && self.send(attribute) == '' #if value is blank, only set if updating
+          member.namedattr({:name => attribute}, self.send(attribute)) if should_include_field_in_xml?(attribute) #if value is blank, only set if updating
         end
       end
+    end
+    
+    def should_include_field_in_xml?(attribute) 
+      @changed_attributes = [] if @changed_attributes.nil?      
+      @changed_attributes.include?(attribute) || attribute == :email
     end
     
     def custom_atributes
