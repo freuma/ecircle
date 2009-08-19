@@ -97,6 +97,7 @@ describe "Ecircle" do
                                       :FullName => "Full Name #{@unique}",
                                       :groupId => 351026868}, 
                                      @configuration)
+      @user = Ecircle::Member.find_by_email(email = "user_#{@unique}@matthewfawcett.co.uk", groupId = 351026868, @configuration)
       @user.firstname.should eql("FN#{@unique}")
       @user.FullName.should eql("Full Name #{@unique}")
     end

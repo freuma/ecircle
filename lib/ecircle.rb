@@ -85,15 +85,19 @@ module Ecircle
       
       attributes.each do |field, value|
         member.instance_variable_set("@#{field}", value)
+        #add to the changed attributes array
+        @changed_attributes = [] if @changed_attributes.nil?
+        @changed_attributes << field.to_sym
         unless member.standard_attributes.include?(field)
           #must be a custom attribute. Add it to the custom_atributes array
           @custom_attributes = Array.new if @custom_attributes.nil?
-          @custom_attributes << field
+          @custom_attributes << field          
         end
       end
       
 
       member.set_custom_attributes @custom_attributes
+      member.set_changed_attributes @changed_attributes
       member.save
       return member
     end
@@ -122,6 +126,10 @@ module Ecircle
     
     def set_custom_attributes(attributes)
       @custom_atributes = attributes
+    end
+    
+    def set_changed_attributes(attributes)
+      @changed_attributes = attributes
     end
     
     def standard_attributes
