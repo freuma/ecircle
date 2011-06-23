@@ -34,6 +34,28 @@ module Ecircle
       return member
     end
     
+    def self.find_by_identifier(ident, groupId, authentication_parameters)
+      member = Member.new
+      member.authenticate(authentication_parameters)
+      member.identifier = ident      
+      lookup = member.driver.lookupMemberByIdentifier(:session => member.session, :groupId => groupId, :identifier => ident, :onlyActive => false).lookupMemberByIdentifierReturn
+      return nil if lookup.nil?
+      member.doc = Hpricot.XML(lookup)  
+      member.groupId = groupId
+      return member
+    end
+    
+    def self.find_by_mobilenumber(number, groupId, authentication_parameters)
+      member = Member.new
+      member.authenticate(authentication_parameters)
+      member.mobilenumber = number      
+      lookup = member.driver.lookupMemberByMobileNumber(:session => member.session, :groupId => groupId, :mobile => number, :onlyActive => false).lookupMemberByMobileNumberReturn
+      return nil if lookup.nil?
+      member.doc = Hpricot.XML(lookup)  
+      member.groupId = groupId
+      return member
+    end
+    
     def id
       @doc.nil? ? nil : (@doc/"member").first.attributes['id'].to_i
     end
